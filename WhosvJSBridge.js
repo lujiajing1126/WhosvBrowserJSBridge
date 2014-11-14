@@ -1,8 +1,8 @@
 /**
  * Whosv奢圈 JSBridge
  * @author Megrez
- * @date 2014-11-11
- * @version 0.1.0
+ * @date 2014-11-14
+ * @version 0.2.0
  */
 
 // for compatible with Other Toolkits
@@ -16,13 +16,11 @@
     _IOS = UA.indexOf("iPhone OS") != -1,
     // WhosvBrowser
     _WHOSV_BROWSER = UA.indexOf("; WhosvBrowser/") != -1,
+    Api = null,
     detectWhosvBrowserApi = function(callback) {
         if (typeof window.whosvBrowserInvoker === 'object' && typeof window.whosvBrowserInvoker.toString === 'function' && (DEBUG || ((_Android || _IOS) && _WHOSV_BROWSER))) {
-            callback();
+            callback(Api);
         }
-    };
-    window.WhosvBrowserApi = {
-        ready: detectWhosvBrowserApi
     };
     detectWhosvBrowserApi(function() {
         var invoker = window.whosvBrowserInvoker;
@@ -56,12 +54,25 @@
         getUserName = function() {
             return invoker.getUserName();
         };
-        window.WhosvBrowserApi = {
-            ready: detectWhosvBrowserApi,
+        /**
+         * 召唤神兽
+         * @param  String action
+         * @param  String[] option1
+         * @param  String[] option2
+         * @return void
+         */
+        invoke = function(action,option1,option2) {
+            return invoker.invoke(action,option1,option2);
+        };
+        Api = {
             toString: toString,
             getVersionName: getVersionName,
             getUserId: getUserId,
-            getUserName: getUserName
+            getUserName: getUserName,
+            invoke: invoke
+        };
+        window.WhosvBrowserApi = {
+            ready: detectWhosvBrowserApi
         };
     });
 })(window);
