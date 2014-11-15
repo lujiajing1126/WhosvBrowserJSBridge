@@ -83,7 +83,7 @@ public void invoke(String action,String[] imageUrls,String[] thumbnails) {
 
 ```javascript
 WhosvBrowserApi.ready(function(api){
-	var str = WhosvBrowserApi.toString();
+	var str = api.toString();
 	alert(str);
 	alert(api.getUserId());
 	alert(api.getUserName());
