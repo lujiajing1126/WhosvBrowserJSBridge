@@ -1,8 +1,8 @@
 /**
  * Whosv奢圈 JSBridge
  * @author Megrez
- * @date 2014-11-14
- * @version 0.2.0
+ * @date 2014-11-17
+ * @version 0.2.1
  */
 
 // for compatible with Other Toolkits
@@ -71,8 +71,8 @@
             getUserName: getUserName,
             invoke: invoke
         };
-        window.WhosvBrowserApi = {
-            ready: detectWhosvBrowserApi
-        };
     });
+    window.WhosvBrowserApi = {
+        ready: detectWhosvBrowserApi
+    };
 })(window);
