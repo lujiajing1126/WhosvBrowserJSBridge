@@ -1,7 +1,7 @@
 /**
  * Whosv奢圈 JSBridge
  * @author Megrez
- * @date 2014-11-17
+ * @date 2014-11-20
  * @version 0.2.2
  */
 
@@ -17,6 +17,18 @@
     // WhosvBrowser
     _WHOSV_BROWSER = UA.indexOf("; WhosvBrowser/") != -1,
     Api = null,
+    /**
+     * 检测whosv浏览器
+     * @function detectWhosvBrowserApi
+     * @param  {Function} callback 真正的Api调用函数
+     * @access public
+     * @returns void
+     * @example
+     * // in anywhere after this file be loaded
+     * detectWhosvBrowserApi(function(api){
+     *     console.log(api.toString());
+     * });
+     */
     detectWhosvBrowserApi = function(callback) {
         if (typeof window.whosvBrowserInvoker === 'object' && typeof window.whosvBrowserInvoker.toString === 'function' && (DEBUG || ((_Android || _IOS) && _WHOSV_BROWSER))) {
             callback(Api);
@@ -25,52 +37,69 @@
     detectWhosvBrowserApi(function() {
         var invoker = window.whosvBrowserInvoker;
         /**
-         * toString
-         * @return String
+         * @function toString
+         * @returns {String}
          */
         var toString = function() {
             return invoker.toString();
         },
         /**
          * 获取当前App的版本号
-         * @return String
+         * @function getVersionName
+         * @returns {String}
          */
         getVersionName = function() {
             return invoker.getVersionName();
         },
         /**
          * 获取当前登录用户的Id
-         * @return String
-         * @example 5444811777686f6e46140000
+         * @function getUserId
+         * @return {String}
+         * @example
+         * // returns 5444811777686f6e46140000
+         * api.getUserId()
          */
         getUserId = function() {
             return invoker.getUserId();
         },
         /**
          * 获取当前登录用户的用户名
-         * @return String
-         * @example 小灰灰
+         * @function getUserName
+         * @returns {String}
+         * @example
+         * //returns 小灰灰
+         * api.getUserName()
          */
         getUserName = function() {
             return invoker.getUserName();
         };
         /**
          * 召唤神兽
-         * @param  String action
-         * @param  String[] option1
-         * @param  String[] option2
-         * @return void
+         * @function invoke
+         * @param  {String} action
+         * @param  {String[]} option1
+         * @param  {String[]} option2
+         * @returns void
+         * @example
+         * // invoke native album components
+         * api.invoke('album',["http://www.baidu.com/1.png"],['http://www.baidu.com/thumbnail.png'])
          */
         invoke = function(action,option1,option2) {
             return invoker.invoke(action,option1,option2);
         };
         /**
          * 从本地数据获取用户信息
+         * @function getUserInfo
          * @param  {String} access_token 用户Token
-         * @return {User} 用户信息
+         * @param {String} user_id 用户Id
+         * @package {Function} callback 回调函数
+         * @returns {User} 用户信息
          */
-        getUserInfo = function(access_token) {
-            return invoker.getUserInfo(access_token);
+        getUserInfo = function(access_token,user_id,callback) {
+            var data = invoker.getUserInfo(access_token,user_id);
+            if(typeof callback === "function") {
+                callback(data);
+            }
         };
         Api = {
             toString: toString,

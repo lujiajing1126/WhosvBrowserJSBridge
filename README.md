@@ -1,53 +1,14 @@
-
 ## Whosv浏览器
 
 ### 接口定义
 
   - toString
-
-  ```
-  /**
-   * toString
-   * @return String
-   */
-  ```
   - getVersionName
-
-  ```
-  /**
-   * 获取当前App的版本号
-   * @return String
-   */
-  ```
   - getUserId
- 
-  ```
-  /**
-   * 获取当前登录用户的Id
-   * @return String
-   * @example 5444811777686f6e46140000
-   */
-  ```
   - getUserName
- 
-  ```
-  /**
-   * 获取当前登录用户的用户名
-   * @return String
-   * @example 小灰灰
-   */
-  ```
   - invoke
+  - getUserInfo
 
-  ```
-  /**
-   * 召唤神兽
-   * @param  String action
-   * @param  String[] option1
-   * @param  String[] option2
-   * @return void
-   */
-  ```
   
 ### Invoke函数
 
@@ -76,6 +37,29 @@ public void invoke(String action,String[] imageUrls,String[] thumbnails) {
   }
 }
 ```
+> Android 调用本地用户数据
+
+```Java
+@JavascriptInterface
+public String getUserInfo(String accessToken,String userId) {
+  if(DataCacheProxy.getInstance().getAccessToken().equals(accessToken)) {
+    User user = User.get(User.class,userId);
+    if(user==null) {
+      return null;
+    } else {
+      User friend = DataCacheProxy.getInstance().getUserByUserMap(userId);
+      if(friend == null) {
+        user.is_friend = false;
+      } else {
+        user.is_friend = true;
+      }
+      return GsonUtils.getInstance().getGson().toJson(user);
+    }
+  } else {
+    return null;
+  }
+}
+```
 
 ### 使用
 
@@ -83,8 +67,6 @@ public void invoke(String action,String[] imageUrls,String[] thumbnails) {
 
 ```javascript
 WhosvBrowserApi.ready(function(api){
-	var str = api.toString();
-	alert(str);
 	alert(api.getUserId());
 	alert(api.getUserName());
 });
