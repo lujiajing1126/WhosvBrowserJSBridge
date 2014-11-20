@@ -2,7 +2,7 @@
  * Whosv奢圈 JSBridge
  * @author Megrez
  * @date 2014-11-17
- * @version 0.2.1
+ * @version 0.2.2
  */
 
 // for compatible with Other Toolkits
@@ -64,12 +64,21 @@
         invoke = function(action,option1,option2) {
             return invoker.invoke(action,option1,option2);
         };
+        /**
+         * 从本地数据获取用户信息
+         * @param  {String} access_token 用户Token
+         * @return {User} 用户信息
+         */
+        getUserInfo = function(access_token) {
+            return invoker.getUserInfo(access_token);
+        };
         Api = {
             toString: toString,
             getVersionName: getVersionName,
             getUserId: getUserId,
             getUserName: getUserName,
-            invoke: invoke
+            invoke: invoke,
+            getUserInfo: getUserInfo
         };
     });
     window.WhosvBrowserApi = {
