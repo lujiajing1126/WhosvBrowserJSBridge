@@ -9,7 +9,16 @@
   - invoke
   - getUserInfo
 
-  
+### Install
+
+```
+npm install
+// generate uglified version
+make build
+// generate js docs
+make docs
+```
+
 ### Invoke函数
 
 > Android 调用Native相册组件
@@ -37,6 +46,9 @@ public void invoke(String action,String[] imageUrls,String[] thumbnails) {
   }
 }
 ```
+
+### getUserInfo
+
 > Android 调用本地用户数据
 
 ```Java
