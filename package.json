@@ -1,0 +1,29 @@
+{
+  "name": "whosvbrowserjsbridge",
+  "version": "0.2.2",
+  "description": "whosvbrowser js bridge",
+  "main": "WhosvJSBridge.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lujiajing1126/WhosvBrowserJSBridge.git"
+  },
+  "keywords": [
+    "js",
+    "bridge",
+    "android",
+    "whosvbrowser"
+  ],
+  "author": "megrez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lujiajing1126/WhosvBrowserJSBridge/issues"
+  },
+  "homepage": "https://github.com/lujiajing1126/WhosvBrowserJSBridge",
+  "devDependencies": {
+    "jsdoc": "^3.2.2",
+    "uglify-js": "^2.4.15"
+  }
+}
